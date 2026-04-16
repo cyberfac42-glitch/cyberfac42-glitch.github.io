@@ -8,7 +8,7 @@
     style.textContent = `
         .chat-widget {
             position: fixed;
-            bottom: 20px;
+            bottom: 90px;
             right: 20px;
             z-index: 9999;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
