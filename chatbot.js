@@ -264,8 +264,13 @@
     window.getChatResponse = function(msg) {
         msg = msg.toLowerCase();
         
-        if (msg.match(/^(bonjour|salut|hello|coucou|bonsoir|hey)/)) {
-            return `Bonjour ! 👋 Bienvenue chez Cyber Fac. Comment puis-je vous aider ?`;
+        // Vérifier d'abord les questions spécifiques (même si ça commence par bonjour)
+        if (msg.match(/photo|identité|passeport|permis|visa|fond blanc/)) {
+            let r = `📸 <strong>Photos d'identité</strong><br><br>✅ Carte d'identité française<br>✅ Passeport français<br>✅ Permis de conduire<br>✅ Titre de séjour<br>✅ Visa<br>✅ <strong>Passeport algérien (fond blanc)</strong><br>✅ <strong>Carte identité algérienne</strong><br><br><span class="chat-price-tag">6€ tous types</span>`;
+            if (msg.match(/ephoto|e-photo|code|numérique|ants/)) {
+                r += `<div class="chat-info-card"><strong>📱 E-photo</strong>Code numérique pour démarches en ligne. Valide immédiatement !</div>`;
+            }
+            return r;
         }
         
         if (msg.match(/horaire|heure|ouvert|fermé|ouvre|ferme|quand/)) {
@@ -274,14 +279,6 @@
         
         if (msg.match(/adresse|où|localisation|situé|trouver|venir/)) {
             return `📍 <strong>Notre adresse :</strong><br><br>${CF_ADRESSE}<br><br>Près du centre-ville de Saint-Étienne.`;
-        }
-        
-        if (msg.match(/photo|identité|passeport|permis|visa|fond blanc/)) {
-            let r = `📸 <strong>Photos d'identité</strong><br><br>✅ Carte d'identité française<br>✅ Passeport français<br>✅ Permis de conduire<br>✅ Titre de séjour<br>✅ Visa<br>✅ <strong>Passeport algérien (fond blanc)</strong><br>✅ <strong>Carte identité algérienne</strong><br><br><span class="chat-price-tag">6€ tous types</span>`;
-            if (msg.match(/ephoto|e-photo|code|numérique|ants/)) {
-                r += `<div class="chat-info-card"><strong>📱 E-photo</strong>Code numérique pour démarches en ligne. Valide immédiatement !</div>`;
-            }
-            return r;
         }
         
         if (msg.match(/tarif|prix|coût|combien|cher/)) {
@@ -334,6 +331,11 @@
         
         if (msg.match(/au revoir|bye|à bientôt/)) {
             return `Au revoir ! 👋 À très bientôt chez Cyber Fac !`;
+        }
+        
+        // Salutations simples (seulement si pas d'autre mot-clé)
+        if (msg.match(/^(bonjour|salut|hello|coucou|bonsoir|hey)[\s!?.]*$/i)) {
+            return `Bonjour ! 👋 Bienvenue chez Cyber Fac. Comment puis-je vous aider ?`;
         }
         
         return `Je peux vous renseigner sur :<br><br>• 📸 Photos d'identité<br>• 🚗 Code DEKRA<br>• 💸 Transfert d'argent<br>• 📄 Démarches administratives<br>• 🇩🇿 Documents Algérie<br>• 🕐 Horaires<br>• 💰 Tarifs<br><br>Ou appelez le <strong>${CF_TEL}</strong>`;
